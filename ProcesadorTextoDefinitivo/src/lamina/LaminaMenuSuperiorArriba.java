@@ -78,7 +78,6 @@ public class LaminaMenuSuperiorArriba extends Lamina {
 					laminaTexto.getTextPane().setComponentPopupMenu(laminaTexto.getPopupMenu());
 				}
 				ortografiaSelected = !ortografiaSelected;
-
 			}
 		});
 
