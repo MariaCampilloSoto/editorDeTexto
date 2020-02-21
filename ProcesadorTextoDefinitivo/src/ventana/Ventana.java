@@ -6,7 +6,6 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
 import javax.swing.JSeparator;
 import javax.swing.JToggleButton;
@@ -19,20 +18,19 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import java.util.List;
 import java.util.Locale;
-import java.util.ResourceBundle;
 
 import lamina.LaminaMenuSuperiorArriba;
 import lamina.LaminaMenuSuperiorAbajo;
 import lamina.LaminaPrincipal;
 import lamina.LaminaTexto;
 import listenner.AbrirArchivoListener;
+import listenner.AcercaDeListener;
 import listenner.GuardarArchivoListener;
 import listenner.InsertarImagenListener;
 import listenner.SalirListener;
+import listenner.VentanaListener;
 import modelo.Componente;
 
 public class Ventana extends JFrame {
@@ -62,7 +60,6 @@ public class Ventana extends JFrame {
 	private JMenu colorMenu;
 	private JMenu herramientasMenu;
 	private JMenu ayuda;
-	private JMenuItem ayudaItem;
 	private JMenuItem acercaDeItem;
 
 	private JMenuItem abrirArchivo;
@@ -120,16 +117,7 @@ public class Ventana extends JFrame {
 
 		setIconImage(Componente.redimensionar("imagenIconoEditor", locale));
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-		addWindowListener(new WindowAdapter() {
-			@Override
-			public void windowClosing(WindowEvent e) {
-				int seleccion = JOptionPane.showConfirmDialog(null, Componente.getRecurso("textSalir", locale),
-						Componente.getRecurso("tituloSalir", locale), JOptionPane.YES_NO_OPTION);
-				if (JOptionPane.YES_OPTION == seleccion) {
-					System.exit(0);
-				}
-			}
-		});
+		addWindowListener(new VentanaListener(locale));
 
 		Toolkit toolkit = Toolkit.getDefaultToolkit();
 		Dimension dimension = toolkit.getScreenSize();
@@ -304,20 +292,8 @@ public class Ventana extends JFrame {
 		menuBar.add(herramientasMenu);
 
 		ayuda = new JMenu();
-		ayudaItem = new JMenuItem();
 		acercaDeItem = new JMenuItem();
-		acercaDeItem.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(null,
-						ResourceBundle.getBundle(Componente.PROPERTY_FILE).getString("textAcercaDeVentana"),
-						ResourceBundle.getBundle(Componente.PROPERTY_FILE).getString("tituloAcercaDeItem"),
-						JOptionPane.INFORMATION_MESSAGE,
-						new ImageIcon(Componente.redimensionar("imagenIconoAcercaDe", locale)));
-			}
-		});
-		ayuda.add(ayudaItem);
+		acercaDeItem.addActionListener(new AcercaDeListener(locale));
 		ayuda.add(acercaDeItem);
 		menuBar.add(ayuda);
 
@@ -351,7 +327,6 @@ public class Ventana extends JFrame {
 		colorMenu.setText(Componente.getRecurso("tituloColor", locale));
 		herramientasMenu.setText(Componente.getRecurso("tituloHerramientas", locale));
 		ayuda.setText(Componente.getRecurso("tituloAyuda", locale));
-		ayudaItem.setText(Componente.getRecurso("tituloAyudaItem", locale));
 		acercaDeItem.setText(Componente.getRecurso("tituloAcercaDeItem", locale));
 	}
 
@@ -384,6 +359,8 @@ public class Ventana extends JFrame {
 				}
 			}
 
+			((AcercaDeListener) acercaDeItem.getActionListeners()[0]).ponerTextoTitulo(locale);
+			((VentanaListener) getWindowListeners()[0]).ponerTextoTitulo(locale);
 			ponerNombreMenu();
 			editorMenu.ponerNombreAcciones(locale);
 			this.setTitle(Componente.getRecurso("tituloVentana", locale));
@@ -415,6 +392,8 @@ public class Ventana extends JFrame {
 				}
 			}
 
+			((AcercaDeListener) acercaDeItem.getActionListeners()[0]).ponerTextoTitulo(locale);
+			((VentanaListener) getWindowListeners()[0]).ponerTextoTitulo(locale);
 			ponerNombreMenu();
 			editorMenu.ponerNombreAcciones(locale);
 			this.setTitle(Componente.getRecurso("tituloVentana", locale));
@@ -446,6 +425,8 @@ public class Ventana extends JFrame {
 				}
 			}
 
+			((AcercaDeListener) acercaDeItem.getActionListeners()[0]).ponerTextoTitulo(locale);
+			((VentanaListener) getWindowListeners()[0]).ponerTextoTitulo(locale);
 			ponerNombreMenu();
 			editorMenu.ponerNombreAcciones(locale);
 			this.setTitle(Componente.getRecurso("tituloVentana", locale));
@@ -478,6 +459,8 @@ public class Ventana extends JFrame {
 				}
 			}
 
+			((AcercaDeListener) acercaDeItem.getActionListeners()[0]).ponerTextoTitulo(locale);
+			((VentanaListener) getWindowListeners()[0]).ponerTextoTitulo(locale);
 			editorMenu.ponerNombreAcciones(locale);
 			this.setTitle(Componente.getRecurso("tituloVentana", locale));
 

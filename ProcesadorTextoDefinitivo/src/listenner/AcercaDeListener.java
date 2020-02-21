@@ -8,7 +8,8 @@ import javax.swing.JOptionPane;
 
 import modelo.Componente;
 
-public class SalirListener implements ActionListener {
+public class AcercaDeListener implements ActionListener{
+	
 	private String texto;
 	private String titulo;
 	private Object[] botones;
@@ -16,10 +17,10 @@ public class SalirListener implements ActionListener {
 	public void ponerTextoTitulo(Locale locale) {
 		texto = Componente.getRecurso("textSalir", locale);
 		titulo = Componente.getRecurso("tituloSalir", locale);
-		botones = new Object[] {Componente.getRecurso("botonSi", locale), Componente.getRecurso("botonNo", locale)};
+		botones = new Object[] {Componente.getRecurso("botonAceptar", locale)};
 	}
 
-	public SalirListener(Locale locale) {
+	public AcercaDeListener(Locale locale) {
 		ponerTextoTitulo(locale);
 	}
 

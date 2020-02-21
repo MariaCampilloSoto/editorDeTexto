@@ -68,16 +68,14 @@ public class LaminaMenuSuperiorArriba extends Lamina {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (!ortografiaSelected) {
-					System.out.println("hola");
-					// laminaTexto.getTextPane().remove(laminaTexto.getPopupMenu());
-					laminaTexto.getTextPane().setComponentPopupMenu(SpellChecker.createCheckerPopup());
+					laminaTexto.getTextPane().remove(laminaTexto.getTextPane().getComponentPopupMenu());
+					laminaTexto.getTextPane().setComponentPopupMenu(null);
 					SpellChecker.setUserDictionaryProvider(new FileUserDictionary());
 					SpellChecker.registerDictionaries(null, null);
 					SpellChecker.register(laminaTexto.getTextPane());
-					System.out.println("vkvmkd");
 				} else {
-					System.out.println("adios");
-					laminaTexto.crearPopup();
+					SpellChecker.unregister(laminaTexto.getTextPane());
+					laminaTexto.getTextPane().setComponentPopupMenu(laminaTexto.getPopupMenu());
 				}
 				ortografiaSelected = !ortografiaSelected;
 
@@ -86,7 +84,7 @@ public class LaminaMenuSuperiorArriba extends Lamina {
 
 		anyadirComponente(ortografia);
 
-		salir = new Salir("imagenSalir", "textSalir", "textSalirDescripcion", locale, new SalirListener(locale));
+		salir = new Salir("imagenSalir", "nombreSalir", "textSalirDescripcion", locale, new SalirListener(locale));
 		anyadirComponente(salir);
 	}
 

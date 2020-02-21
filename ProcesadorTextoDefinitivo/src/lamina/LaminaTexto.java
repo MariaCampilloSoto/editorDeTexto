@@ -21,6 +21,8 @@ public class LaminaTexto extends JScrollPane {
 	private UndoAction undoAction;
 	private RedoAction redoAction;
 
+	private JPopupMenu popupMenu;
+
 	private JTextPane textPane;
 
 	public LaminaTexto() {
@@ -31,19 +33,15 @@ public class LaminaTexto extends JScrollPane {
 		textPane = new JTextPane();
 		textPane.setAutoscrolls(false);
 		textPane.getDocument().addUndoableEditListener(new UndoListener());
-		crearPopup();
+
+		popupMenu = new JPopupMenu();
+		textPane.setComponentPopupMenu(popupMenu);
 
 		setViewportView(textPane);
 	}
 
-	public void crearPopup() {
-		JPopupMenu popupMenu = new JPopupMenu();
-		textPane.setComponentPopupMenu(popupMenu);
-	}
-
 	public JPopupMenu getPopupMenu() {
-		JPopupMenu p = textPane.getComponentPopupMenu();
-		return p;
+		return popupMenu;
 	}
 
 	public JTextPane getTextPane() {
