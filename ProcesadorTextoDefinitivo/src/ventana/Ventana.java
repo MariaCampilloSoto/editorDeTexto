@@ -109,23 +109,29 @@ public class Ventana extends JFrame {
 	private JToggleButton aleman;
 
 	private void configuracionInicial() {
-
+		// Ponemos la localidad por defecto
 		locale = new Locale("es");
 
+		// Inicializamos unas varibles importantes, las del idioma
 		ESPANYOL = Componente.getRecurso("textEspanyol", locale);
 		INGLES = Componente.getRecurso("textIngles", locale);
 		FRANCES = Componente.getRecurso("textFrances", locale);
 		ALEMAN = Componente.getRecurso("textAleman", locale);
 
+		// Configuramos el tamaño de la ventana.
 		setSize(ANCHO_VENTANA, ALTO_VENTANA);
+		// Ponemos titulo
 		setTitle(Componente.getRecurso("tituloVentana", locale));
-
+		// Para que se puede agrandar o empequeñecer
 		setResizable(true);
 
+		// Ponemos icono
 		setIconImage(Componente.redimensionar("imagenIconoEditor", locale));
+		// Para que nos pregunte antes de cerrar y añadimos un listener que hemos creado
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		addWindowListener(new VentanaListener(locale));
 
+		// Ponemos la ventana en medio de la pantalla
 		Toolkit toolkit = Toolkit.getDefaultToolkit();
 		Dimension dimension = toolkit.getScreenSize();
 
@@ -383,7 +389,6 @@ public class Ventana extends JFrame {
 				if (componente.getActionListener() instanceof SalirListener) {
 					((SalirListener) componente.getActionListener()).ponerTextoTitulo(locale);
 				}
-
 				if (componente.getActionListener() instanceof AbrirArchivoListener) {
 					((AbrirArchivoListener) componente.getActionListener()).ponerTextoTitulo(locale);
 				}
@@ -396,7 +401,6 @@ public class Ventana extends JFrame {
 					((InsertarImagenListener) componente.getActionListener()).ponerTextoTitulo(locale);
 				}
 			}
-
 			((AcercaDeListener) acercaDeItem.getActionListeners()[0]).ponerTextoTitulo(locale);
 			((VentanaListener) getWindowListeners()[0]).ponerTextoTitulo(locale);
 			ponerNombreMenu();
@@ -407,7 +411,7 @@ public class Ventana extends JFrame {
 			this.setTitle(Componente.getRecurso("tituloVentana", locale));
 			laminaMenuSuperiorAbajo.getFuente().cambiarIdioma(locale);
 			laminaMenuSuperiorAbajo.getTamanyo().cambiarIdioma(locale);
-			
+
 		} else if (FRANCES.equals(nombre)) {
 			locale = new Locale("fr");
 			List<Componente> componentesFrances = laminaMenuSuperiorAbajo.getComponentes();
@@ -445,7 +449,7 @@ public class Ventana extends JFrame {
 			editorMenu.setText(Componente.getRecurso("tituloEditorMenu", locale));
 			laminaMenuSuperiorAbajo.getFuente().cambiarIdioma(locale);
 			laminaMenuSuperiorAbajo.getTamanyo().cambiarIdioma(locale);
-			
+
 		} else if (ALEMAN.equals(nombre)) {
 			locale = new Locale("de");
 			List<Componente> componentesAleman = laminaMenuSuperiorAbajo.getComponentes();
@@ -483,7 +487,7 @@ public class Ventana extends JFrame {
 			editorMenu.setText(Componente.getRecurso("tituloEditorMenu", locale));
 			laminaMenuSuperiorAbajo.getFuente().cambiarIdioma(locale);
 			laminaMenuSuperiorAbajo.getTamanyo().cambiarIdioma(locale);
-			
+
 		} else {
 			locale = new Locale("es");
 			List<Componente> componentesEspanyol = laminaMenuSuperiorAbajo.getComponentes();
@@ -521,7 +525,7 @@ public class Ventana extends JFrame {
 			editorMenu.setText(Componente.getRecurso("tituloEditorMenu", locale));
 			laminaMenuSuperiorAbajo.getFuente().cambiarIdioma(locale);
 			laminaMenuSuperiorAbajo.getTamanyo().cambiarIdioma(locale);
-			
+
 		}
 	}
 

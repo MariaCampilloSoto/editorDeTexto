@@ -83,7 +83,7 @@ public class LaminaMenuSuperiorAbajo extends Lamina {
 		anyadirComponente(colorPanel);
 	}
 
-	private void configuracionBox() {
+	private void configuracionToolBar() {
 		// Creamos el toolbar
 		JToolBar menuHerramientas = new JToolBar();
 		menuHerramientas.setFloatable(false);
@@ -118,7 +118,7 @@ public class LaminaMenuSuperiorAbajo extends Lamina {
 	}
 
 	private Integer[] ponerNumerosArray() {
-		// Para poner ciertos nuemos en el toolbar, de lo contraio serían muchos y el usuario se
+		// Para poner ciertos numeros en el toolbar, de lo contraio serían muchos y el usuario se
 		// estresaría
 		int i = 0;
 		int numeroTamanyo = 1;
@@ -169,10 +169,10 @@ public class LaminaMenuSuperiorAbajo extends Lamina {
 	public LaminaMenuSuperiorAbajo(LaminaTexto laminaTexto) {
 		// Cogemos el locale que le pasaremos a las variables
 		Locale locale = getLocale();
-
+		// Inicializamos las variables
 		inicializacionVariables(laminaTexto, locale);
-
-		configuracionBox();
+		// Ponermos los elementos en el JToolBar
+		configuracionToolBar();
 	}
 
 	public Fuente getFuente() {

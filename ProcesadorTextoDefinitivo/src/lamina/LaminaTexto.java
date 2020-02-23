@@ -73,7 +73,7 @@ public class LaminaTexto extends JScrollPane {
 		}
 	}
 
-	// Listener para el deshacer
+	// Listener para el deshacer y rehacer
 	private class UndoListener implements UndoableEditListener {
 
 		@Override
