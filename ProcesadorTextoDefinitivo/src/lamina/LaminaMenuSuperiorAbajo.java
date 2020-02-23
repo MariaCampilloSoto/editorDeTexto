@@ -3,7 +3,6 @@ package lamina;
 import java.util.Locale;
 
 import javax.swing.ButtonGroup;
-import javax.swing.JSeparator;
 import javax.swing.JToggleButton;
 import javax.swing.JToolBar;
 

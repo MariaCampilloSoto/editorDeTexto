@@ -2,9 +2,6 @@ package modelo;
 
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.FontMetrics;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Locale;
@@ -30,12 +27,12 @@ public class Especial<E> {
 	private JComboBox<E> combo;
 	private E[] elementos;
 	private LaminaTexto laminaTexto;
-	private Locale locale;
 
 	public JComboBox<E> getComboBox() {
 		combo = new JComboBox<E>(elementos);
 		combo.setName(nombre);
 
+		// Ponermos una fuente predeterminada con unos valores
 		if (FUENTE.equals(combo.getName())) {
 			combo.setSelectedIndex(30);
 			laminaTexto.getTextPane().setFont(new Font(combo.getSelectedItem().toString(),
@@ -51,6 +48,7 @@ public class Especial<E> {
 							Integer.parseInt(combo.getSelectedItem().toString())));
 		}
 
+		// Tenemos un array de acciones para que cada elmento del JComboBox tenga su accion
 		Action[] acciones = new Action[elementos.length];
 		for (int i = 0; i < elementos.length; i++) {
 			if (FUENTE.equals(combo.getName())) {
@@ -66,7 +64,8 @@ public class Especial<E> {
 			}
 		}
 		combo.addActionListener(new ActionListener() {
-
+			// Buscamos si es igual y cambiamos la fuente o el tamaño dependiendo de lo que
+			// seleccionemos
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (FUENTE.equals(combo.getName())) {
@@ -94,7 +93,9 @@ public class Especial<E> {
 	}
 
 	public JMenu getNewMenu() {
+		// Solamente crearemos ciertos JMenuItem
 		menu = new JMenu(nombre);
+		// Si se pasa de 15, el usuario agradecerá que pongamos un menu auxiliar
 		JMenu otros = new JMenu(ResourceBundle.getBundle(Componente.PROPERTY_FILE).getString("textOtros"));
 		int contadorE = 0;
 		while (contadorE < numeroElementosMenu && contadorE < elementos.length) {
@@ -133,24 +134,20 @@ public class Especial<E> {
 		}
 		return menu;
 	}
-	
+
 	public void cambiarIdioma(Locale locale) {
 		menu.setText(Componente.getRecurso(nombreProperty, locale));
 		combo.setName(Componente.getRecurso(nombreProperty, locale));
 	}
 
-	public String getRecurso(String nombreRecurso) {
-		return ResourceBundle.getBundle(Componente.PROPERTY_FILE).getString(nombreRecurso);
-	}
-
 	@SafeVarargs
-	public Especial(Locale locale, LaminaTexto laminaTexto, String nombreProperty, int numeroElementosMenu, E... elementos) {
-		this.locale = locale;
+	public Especial(Locale locale, LaminaTexto laminaTexto, String nombreProperty, int numeroElementosMenu,
+			E... elementos) {
 		this.laminaTexto = laminaTexto;
 		this.nombreProperty = nombreProperty;
 		this.numeroElementosMenu = numeroElementosMenu;
 		this.elementos = elementos;
-		this.nombre = getRecurso(nombreProperty);
+		this.nombre = Componente.getRecurso(nombreProperty, locale);
 	}
 
 	public String getNombre() {

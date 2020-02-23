@@ -7,9 +7,9 @@ import javax.swing.JPanel;
 
 public class Lamina extends JPanel {
 	private static final long serialVersionUID = 1L;
-
+	
+	// Constante y variable
 	public static final int NUMERO_MAXIMO_TAMANYO = 84;
-
 	private List<Componente> componentes;
 
 	public void anyadirComponente(Componente componente) {
@@ -28,3 +28,6 @@ public class Lamina extends JPanel {
 		return componentes;
 	}
 }
+
+
+

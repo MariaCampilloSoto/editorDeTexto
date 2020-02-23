@@ -37,8 +37,7 @@ public class GuardarArchivoListener implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		JFileChooser fileChooser = new JFileChooser();
 		fileChooser.setLocale(locale);
-		fileChooser.setMultiSelectionEnabled(true);
-		fileChooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+		fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
 		FileNameExtensionFilter filtro = new FileNameExtensionFilter(".mcs", "mcs");
 		fileChooser.setFileFilter(filtro);
 		int seleccion = fileChooser.showSaveDialog(laminaTexto.getTextPane());
