@@ -66,10 +66,7 @@ public class Componente {
 			}
 		}
 	}
-
-	public static Object[] getBotones(Locale locale) {
-		return new Object[] {getRecurso("botonSi", locale), getRecurso("botonNo", locale)};
-	}
+	
 
 	public String getRecurso(String nombreRecurso) {
 		return ResourceBundle.getBundle(PROPERTY_FILE, locale).getString(nombreRecurso);

@@ -15,8 +15,8 @@ public class AcercaDeListener implements ActionListener{
 	private Object[] botones;
 
 	public void ponerTextoTitulo(Locale locale) {
-		texto = Componente.getRecurso("textSalir", locale);
-		titulo = Componente.getRecurso("tituloSalir", locale);
+		texto = Componente.getRecurso("textAcercaDeVentana", locale);
+		titulo = Componente.getRecurso("tituloAcercaDeItem", locale);
 		botones = new Object[] {Componente.getRecurso("botonAceptar", locale)};
 	}
 
@@ -26,11 +26,8 @@ public class AcercaDeListener implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		int seleccion = JOptionPane.showOptionDialog(null, texto, titulo, JOptionPane.YES_NO_OPTION,
+		int seleccion = JOptionPane.showOptionDialog(null, texto, titulo, JOptionPane.OK_OPTION,
 				JOptionPane.WARNING_MESSAGE, null, botones, botones[0]);
-		if (JOptionPane.YES_OPTION == seleccion) {
-			System.exit(0);
-		}
 	}
 
 }

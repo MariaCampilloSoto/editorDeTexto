@@ -9,6 +9,9 @@ import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 import javax.swing.JSeparator;
 import javax.swing.JToggleButton;
+import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 import componente.MenuEditor;
 
@@ -39,6 +42,7 @@ public class Ventana extends JFrame {
 	public static final int ANCHO_VENTANA = 800;
 	public static final int ALTO_VENTANA = 500;
 	public static final int MAXIMO_TAMANYO = 84;
+	public static final int NUMERO_SKINS = 13;
 
 	private Locale locale;
 
@@ -73,6 +77,8 @@ public class Ventana extends JFrame {
 	private JMenuItem subrayado;
 
 	private JMenuItem ortografia;
+	private JMenu skinMenu;
+	private String[] nombreTemas;
 
 	private JMenuItem insertarImagen;
 
@@ -103,6 +109,7 @@ public class Ventana extends JFrame {
 	private JToggleButton aleman;
 
 	private void configuracionInicial() {
+
 		locale = new Locale("es");
 
 		ESPANYOL = Componente.getRecurso("textEspanyol", locale);
@@ -132,6 +139,22 @@ public class Ventana extends JFrame {
 	}
 
 	public void inicializacionVariables() {
+		nombreTemas = new String[NUMERO_SKINS];
+
+		nombreTemas[0] = "Texture";
+		nombreTemas[1] = "Smart";
+		nombreTemas[2] = "Noire";
+		nombreTemas[3] = "Acryl";
+		nombreTemas[4] = "Aero";
+		nombreTemas[5] = "Aluminium";
+		nombreTemas[6] = "Bernstein";
+		nombreTemas[7] = "Fast";
+		nombreTemas[8] = "Graphite";
+		nombreTemas[9] = "HiFi";
+		nombreTemas[10] = "Luna";
+		nombreTemas[11] = "McWin";
+		nombreTemas[12] = "Mint";
+
 		laminaPrincipal = new LaminaPrincipal();
 		laminaMenuSuperiorAbajo = laminaPrincipal.getLaminaMenuSuperiorAbajo();
 		laminaMenuSuperiorArriba = laminaPrincipal.getLaminaMenuSuperiorArriba();
@@ -150,6 +173,7 @@ public class Ventana extends JFrame {
 		tamanyo = laminaMenuSuperiorAbajo.getTamanyo().getNewMenu();
 
 		ortografia = laminaMenuSuperiorArriba.getOrtografia().getComponenteMenuItem(null, null);
+		skinMenu = new JMenu(Componente.getRecurso("cambioFuenteSkin", locale));
 
 		insertarImagen = laminaMenuSuperiorArriba.getInsertarImagen().getComponenteMenuItem(null, null);
 
@@ -220,7 +244,7 @@ public class Ventana extends JFrame {
 		});
 		aleman = new JToggleButton(new ImageIcon(Componente.redimensionar("imagenAleman", locale)));
 		aleman.setName(Componente.getRecurso("textAleman", locale));
-		espanyol.addActionListener(new ActionListener() {
+		aleman.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -289,6 +313,21 @@ public class Ventana extends JFrame {
 
 		herramientasMenu = new JMenu();
 		herramientasMenu.add(ortografia);
+
+		for (String nombre : nombreTemas) {
+			JMenuItem item = new JMenuItem(nombre);
+			item.addActionListener(new ActionListener() {
+
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					String n = ((JMenuItem) e.getSource()).getText();
+					cambioSkin("com.jtattoo.plaf." + n.toLowerCase() + "." + n + "LookAndFeel");
+				}
+			});
+
+			skinMenu.add(item);
+		}
+		herramientasMenu.add(skinMenu);
 		menuBar.add(herramientasMenu);
 
 		ayuda = new JMenu();
@@ -301,7 +340,6 @@ public class Ventana extends JFrame {
 		setJMenuBar(menuBar);
 	}
 
-	// TODO no funciona el PopUP
 	public void configuracionMenuEmergente() {
 		popUpMenu.add(negritaEmergente);
 		popUpMenu.add(cursivaEmergente);
@@ -362,9 +400,14 @@ public class Ventana extends JFrame {
 			((AcercaDeListener) acercaDeItem.getActionListeners()[0]).ponerTextoTitulo(locale);
 			((VentanaListener) getWindowListeners()[0]).ponerTextoTitulo(locale);
 			ponerNombreMenu();
+			laminaTexto.cambiarIdiomaUndoRedo(locale);
+			skinMenu.setText(Componente.getRecurso("cambioFuenteSkin", locale));
 			editorMenu.ponerNombreAcciones(locale);
+			editorMenu.setText(Componente.getRecurso("tituloEditorMenu", locale));
 			this.setTitle(Componente.getRecurso("tituloVentana", locale));
-
+			laminaMenuSuperiorAbajo.getFuente().cambiarIdioma(locale);
+			laminaMenuSuperiorAbajo.getTamanyo().cambiarIdioma(locale);
+			
 		} else if (FRANCES.equals(nombre)) {
 			locale = new Locale("fr");
 			List<Componente> componentesFrances = laminaMenuSuperiorAbajo.getComponentes();
@@ -395,9 +438,14 @@ public class Ventana extends JFrame {
 			((AcercaDeListener) acercaDeItem.getActionListeners()[0]).ponerTextoTitulo(locale);
 			((VentanaListener) getWindowListeners()[0]).ponerTextoTitulo(locale);
 			ponerNombreMenu();
+			laminaTexto.cambiarIdiomaUndoRedo(locale);
 			editorMenu.ponerNombreAcciones(locale);
 			this.setTitle(Componente.getRecurso("tituloVentana", locale));
-
+			skinMenu.setText(Componente.getRecurso("cambioFuenteSkin", locale));
+			editorMenu.setText(Componente.getRecurso("tituloEditorMenu", locale));
+			laminaMenuSuperiorAbajo.getFuente().cambiarIdioma(locale);
+			laminaMenuSuperiorAbajo.getTamanyo().cambiarIdioma(locale);
+			
 		} else if (ALEMAN.equals(nombre)) {
 			locale = new Locale("de");
 			List<Componente> componentesAleman = laminaMenuSuperiorAbajo.getComponentes();
@@ -429,8 +477,13 @@ public class Ventana extends JFrame {
 			((VentanaListener) getWindowListeners()[0]).ponerTextoTitulo(locale);
 			ponerNombreMenu();
 			editorMenu.ponerNombreAcciones(locale);
+			laminaTexto.cambiarIdiomaUndoRedo(locale);
 			this.setTitle(Componente.getRecurso("tituloVentana", locale));
-
+			skinMenu.setText(Componente.getRecurso("cambioFuenteSkin", locale));
+			editorMenu.setText(Componente.getRecurso("tituloEditorMenu", locale));
+			laminaMenuSuperiorAbajo.getFuente().cambiarIdioma(locale);
+			laminaMenuSuperiorAbajo.getTamanyo().cambiarIdioma(locale);
+			
 		} else {
 			locale = new Locale("es");
 			List<Componente> componentesEspanyol = laminaMenuSuperiorAbajo.getComponentes();
@@ -462,8 +515,23 @@ public class Ventana extends JFrame {
 			((AcercaDeListener) acercaDeItem.getActionListeners()[0]).ponerTextoTitulo(locale);
 			((VentanaListener) getWindowListeners()[0]).ponerTextoTitulo(locale);
 			editorMenu.ponerNombreAcciones(locale);
+			laminaTexto.cambiarIdiomaUndoRedo(locale);
 			this.setTitle(Componente.getRecurso("tituloVentana", locale));
+			skinMenu.setText(Componente.getRecurso("cambioFuenteSkin", locale));
+			editorMenu.setText(Componente.getRecurso("tituloEditorMenu", locale));
+			laminaMenuSuperiorAbajo.getFuente().cambiarIdioma(locale);
+			laminaMenuSuperiorAbajo.getTamanyo().cambiarIdioma(locale);
+			
+		}
+	}
 
+	public void cambioSkin(String nombreSkin) {
+		try {
+			UIManager.setLookAndFeel(nombreSkin);
+			SwingUtilities.updateComponentTreeUI(this);
+		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
+				| UnsupportedLookAndFeelException e) {
+			e.printStackTrace();
 		}
 	}
 

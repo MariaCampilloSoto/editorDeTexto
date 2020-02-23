@@ -1,8 +1,13 @@
 package modelo;
 
+import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.FontMetrics;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Locale;
 import java.util.ResourceBundle;
 
 import javax.swing.Action;
@@ -25,6 +30,7 @@ public class Especial<E> {
 	private JComboBox<E> combo;
 	private E[] elementos;
 	private LaminaTexto laminaTexto;
+	private Locale locale;
 
 	public JComboBox<E> getComboBox() {
 		combo = new JComboBox<E>(elementos);
@@ -38,6 +44,7 @@ public class Especial<E> {
 
 		if (TAMANYO.equals(combo.getName())) {
 			combo.setSelectedIndex(12);
+			combo.setPreferredSize(new Dimension(3 * Componente.ANCHO_IMAGEN, Componente.ALTO_IMAGEN));
 			laminaTexto.getTextPane()
 					.setFont(new Font(laminaTexto.getTextPane().getFont().getFontName(),
 							laminaTexto.getTextPane().getFont().getStyle(),
@@ -126,13 +133,19 @@ public class Especial<E> {
 		}
 		return menu;
 	}
+	
+	public void cambiarIdioma(Locale locale) {
+		menu.setText(Componente.getRecurso(nombreProperty, locale));
+		combo.setName(Componente.getRecurso(nombreProperty, locale));
+	}
 
 	public String getRecurso(String nombreRecurso) {
 		return ResourceBundle.getBundle(Componente.PROPERTY_FILE).getString(nombreRecurso);
 	}
 
 	@SafeVarargs
-	public Especial(LaminaTexto laminaTexto, String nombreProperty, int numeroElementosMenu, E... elementos) {
+	public Especial(Locale locale, LaminaTexto laminaTexto, String nombreProperty, int numeroElementosMenu, E... elementos) {
+		this.locale = locale;
 		this.laminaTexto = laminaTexto;
 		this.nombreProperty = nombreProperty;
 		this.numeroElementosMenu = numeroElementosMenu;

@@ -1,11 +1,13 @@
 package especial;
 
+import java.util.Locale;
+
 import lamina.LaminaTexto;
 import modelo.Especial;
 
 public class Tamanyo extends Especial<Integer>{
 
-	public Tamanyo(LaminaTexto laminaTexto, String nombreProperty, int numeroElementosMenu, Integer[] elementos) {
-		super(laminaTexto, nombreProperty, numeroElementosMenu, elementos);
+	public Tamanyo(Locale locale, LaminaTexto laminaTexto, String nombreProperty, int numeroElementosMenu, Integer[] elementos) {
+		super(locale, laminaTexto, nombreProperty, numeroElementosMenu, elementos);
 	}
 }

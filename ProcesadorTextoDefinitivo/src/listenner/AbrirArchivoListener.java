@@ -24,8 +24,8 @@ public class AbrirArchivoListener implements ActionListener {
 	private String titulo;
 
 	public void ponerTextoTitulo(Locale locale) {
-		texto = Componente.getRecurso("textSalir", locale);
-		titulo = Componente.getRecurso("tituloSalir", locale);
+		texto = Componente.getRecurso("errorAbrirArchivo", locale);
+		titulo = Componente.getRecurso("tituloError", locale);
 	}
 
 	public AbrirArchivoListener(LaminaTexto laminaTexto, Locale locale) {

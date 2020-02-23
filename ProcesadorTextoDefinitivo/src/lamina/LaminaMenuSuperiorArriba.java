@@ -24,9 +24,9 @@ import modelo.Lamina;
 
 public class LaminaMenuSuperiorArriba extends Lamina {
 	private static final long serialVersionUID = 1L;
-
+	// Variables que usaremos y pondremos en una parte del menu de herramientas
 	private boolean ortografiaSelected;
-	
+
 	private JToolBar menuHerramientas;
 
 	private AbrirArchivo abrirArchivo;
@@ -38,18 +38,8 @@ public class LaminaMenuSuperiorArriba extends Lamina {
 
 	private Salir salir;
 
-	public LaminaMenuSuperiorArriba(LaminaTexto laminaTexto) {
-		Locale locale = getLocale();
-		setLayout(new FlowLayout());
-		
-		ortografiaSelected = false;
-		
-		inicializacionVariables(laminaTexto, locale);
-
-		configurarBox();
-	}
-	
 	public void inicializacionVariables(LaminaTexto laminaTexto, Locale locale) {
+		// Inicializacion de la varibles
 		abrirArchivo = new AbrirArchivo("imagenAbrirArchivo", "textAbrirArchivo", null, locale,
 				new AbrirArchivoListener(laminaTexto, locale));
 		anyadirComponente(abrirArchivo);
@@ -64,16 +54,20 @@ public class LaminaMenuSuperiorArriba extends Lamina {
 
 		ortografia = new Ortografia("imagenOrtografia", "textCorregirOrtografia", null, locale, new ActionListener() {
 
-			//TODO popup no funciona
+			// Para ortografia, altener su propio popup hay que quietar uno y poner otro
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (!ortografiaSelected) {
 					laminaTexto.getTextPane().remove(laminaTexto.getTextPane().getComponentPopupMenu());
 					laminaTexto.getTextPane().setComponentPopupMenu(null);
+					// Poner los diccionarios que tenga el usuario
 					SpellChecker.setUserDictionaryProvider(new FileUserDictionary());
+					// Si los tenemos fuera de la aplicacion hay que enlazarlos
 					SpellChecker.registerDictionaries(null, null);
+					// Registar la lamina donde se escribe
 					SpellChecker.register(laminaTexto.getTextPane());
 				} else {
+					// Quitar el popup y poner el que hemos creado
 					SpellChecker.unregister(laminaTexto.getTextPane());
 					laminaTexto.getTextPane().setComponentPopupMenu(laminaTexto.getPopupMenu());
 				}
@@ -88,6 +82,7 @@ public class LaminaMenuSuperiorArriba extends Lamina {
 	}
 
 	private void configurarBox() {
+		// Poner elementos en el menú de herramientas
 		menuHerramientas = new JToolBar();
 		menuHerramientas.setFloatable(false);
 
@@ -98,14 +93,23 @@ public class LaminaMenuSuperiorArriba extends Lamina {
 
 		menuHerramientas.add(ortografia.getComponenteToggleButton());
 
-		// Este se añade al final en la ventana para que vaya primero los idiomas
-//		menuHerramientas.add(salir.getComponenteToggleButton());
-
 		add(menuHerramientas);
 	}
-	
+
+	// Añadir futuros componentes al final de la barra de herramientas
 	public void anyadirComponenteMenuHerramientas(JToggleButton button) {
 		menuHerramientas.add(button);
+	}
+
+	public LaminaMenuSuperiorArriba(LaminaTexto laminaTexto) {
+		Locale locale = getLocale();
+		setLayout(new FlowLayout());
+
+		ortografiaSelected = false;
+
+		inicializacionVariables(laminaTexto, locale);
+
+		configurarBox();
 	}
 
 	public AbrirArchivo getAbrirArchivo() {

@@ -3,6 +3,7 @@ package lamina;
 import java.util.Locale;
 
 import javax.swing.ButtonGroup;
+import javax.swing.JSeparator;
 import javax.swing.JToggleButton;
 import javax.swing.JToolBar;
 
@@ -28,7 +29,7 @@ import modelo.Lamina;
 
 public class LaminaMenuSuperiorAbajo extends Lamina {
 	private static final long serialVersionUID = 1L;
-
+	// Variables que vamos a usar
 	public static final int MAXIMO_TAMANYO = 84;
 
 	private Fuente fuente;
@@ -48,10 +49,11 @@ public class LaminaMenuSuperiorAbajo extends Lamina {
 
 	private void inicializacionVariables(LaminaTexto laminaTexto, Locale locale) {
 		// Inicializacion variables
-		fuente = new Fuente(laminaTexto, "textFuente", 25);
+		fuente = new Fuente(locale, laminaTexto, "textFuente", 25);
 
+		// Creamos una lista de numeros para ponerlos en el JToolBar
 		Integer[] listaNumeros = ponerNumerosArray();
-		tamanyo = new Tamanyo(laminaTexto, "textTamanyo", 11, listaNumeros);
+		tamanyo = new Tamanyo(locale, laminaTexto, "textTamanyo", 11, listaNumeros);
 
 		negrita = new Negrita("imagenNegrita", "textNegrita", "textNegritaDescripcion", locale, new NegritaListener());
 		anyadirComponente(negrita);
@@ -83,15 +85,18 @@ public class LaminaMenuSuperiorAbajo extends Lamina {
 	}
 
 	private void configuracionBox() {
+		// Creamos el toolbar
 		JToolBar menuHerramientas = new JToolBar();
 		menuHerramientas.setFloatable(false);
 
+		// Añadimos los botones
 		menuHerramientas.add(fuente.getComboBox());
 		menuHerramientas.add(tamanyo.getComboBox());
 		menuHerramientas.add(negrita.getComponenteToggleButton());
 		menuHerramientas.add(cursiva.getComponenteToggleButton());
 		menuHerramientas.add(subrayado.getComponenteToggleButton());
 
+		// En concreto hacemos un grupo con la alineacion
 		ButtonGroup grupoAlineacion = new ButtonGroup();
 		JToggleButton izquierda = this.izquierda.getComponenteToggleButton();
 		JToggleButton centrado = this.centrado.getComponenteToggleButton();
@@ -114,8 +119,11 @@ public class LaminaMenuSuperiorAbajo extends Lamina {
 	}
 
 	private Integer[] ponerNumerosArray() {
+		// Para poner ciertos nuemos en el toolbar, de lo contraio serían muchos y el usuario se
+		// estresaría
 		int i = 0;
 		int numeroTamanyo = 1;
+		// Cogemos el numero de elementos
 		while (numeroTamanyo < MAXIMO_TAMANYO) {
 			if (numeroTamanyo < 10) {
 				numeroTamanyo += 3;
@@ -132,6 +140,7 @@ public class LaminaMenuSuperiorAbajo extends Lamina {
 
 		}
 
+		// Teniendo el numero de elementos que vamos a poner, creamos un array
 		Integer[] listaNumeros = new Integer[i];
 		i = 0;
 		numeroTamanyo = 1;
@@ -157,11 +166,11 @@ public class LaminaMenuSuperiorAbajo extends Lamina {
 
 		return listaNumeros;
 	}
-	
-	public LaminaMenuSuperiorAbajo(LaminaTexto laminaTexto) {
 
+	public LaminaMenuSuperiorAbajo(LaminaTexto laminaTexto) {
+		// Cogemos el locale que le pasaremos a las variables
 		Locale locale = getLocale();
-		
+
 		inicializacionVariables(laminaTexto, locale);
 
 		configuracionBox();
