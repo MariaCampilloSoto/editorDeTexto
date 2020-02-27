@@ -1,3 +1,7 @@
+/**
+ * @author: María Inmaculada Campillo Soto
+ */
+
 package ventana;
 
 import javax.swing.ButtonGroup;
@@ -36,78 +40,176 @@ import listenner.SalirListener;
 import listenner.VentanaListener;
 import modelo.Componente;
 
+/**
+ * La clase "Ventana" que contiene una barra en la parte superior (JMenuBar), cambia el
+ * idioma del programa y el aspecto y la lámina principal.
+ * 
+ * @see lamina.LaminaPrincipal
+ */
 public class Ventana extends JFrame {
+
+	/** La constante serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
+	/** La constante ANCHO_VENTANA. */
 	public static final int ANCHO_VENTANA = 800;
+
+	/** La constante ALTO_VENTANA. */
 	public static final int ALTO_VENTANA = 500;
+
+	/** La constante MAXIMO_TAMANYO, número máximo que puede aumenta el tamaño. */
 	public static final int MAXIMO_TAMANYO = 84;
+
+	/** La constante NUMERO_SKINS. */
 	public static final int NUMERO_SKINS = 13;
 
+	/** La localidad. */
 	private Locale locale;
 
+	/** El nombre del botón de español. */
 	public static String ESPANYOL;
+
+	/** El nombre del botón de inglés. */
 	public static String INGLES;
+
+	/** El nombre del botón de francés. */
 	public static String FRANCES;
+
+	/** El nombre del botón de alemán. */
 	public static String ALEMAN;
 
+	/** La lámina principal. */
 	private LaminaPrincipal laminaPrincipal;
+
+	/** La lámina del menú superior abajo. */
 	private LaminaMenuSuperiorAbajo laminaMenuSuperiorAbajo;
+
+	/** La lámina del menú superior arriba. */
 	private LaminaMenuSuperiorArriba laminaMenuSuperiorArriba;
+
+	/** La lámina de texto. */
 	private LaminaTexto laminaTexto;
 
+	/** El JMenu de archivo. */
 	private JMenu archivoMenu;
+
+	/** El JMenu de insertar. */
 	private JMenu insertarMenu;
+
+	/** El JMenu de formato. */
 	private JMenu formatoMenu;
+
+	/** El JMenu de texto. */
 	private JMenu textoMenu;
+
+	/** El JMenu de alinear . */
 	private JMenu alinearMenu;
+
+	/** El JMenu de color. */
 	private JMenu colorMenu;
+
+	/** El JMenu de herramientas. */
 	private JMenu herramientasMenu;
+
+	/** El JMenu de ayuda. */
 	private JMenu ayuda;
+
+	/** El JMenuItem de "acerca de". */
 	private JMenuItem acercaDeItem;
 
+	/** El JMenuItem de abrir archivo. */
 	private JMenuItem abrirArchivo;
+
+	/** El JMenuItem de guardar archivo. */
 	private JMenuItem guardarArchivo;
+
+	/** El JMenuItem de salir. */
 	private JMenuItem salir;
 
+	/** El menú editor . */
 	private MenuEditor editorMenu;
 
+	/** El JMenuItem de negrita. */
 	private JMenuItem negrita;
+
+	/** El JMenuItem de cursiva. */
 	private JMenuItem cursiva;
+
+	/** El JMenuItem de subrayado. */
 	private JMenuItem subrayado;
 
+	/** El JMenuItem de ortografia. */
 	private JMenuItem ortografia;
+
+	/** El JMenu de skin. */
 	private JMenu skinMenu;
+
+	/** Un array con el nombre de los temas para el cambio de aspecto. */
 	private String[] nombreTemas;
 
+	/** El JMenuItem de insertar imagen. */
 	private JMenuItem insertarImagen;
 
+	/** El JMenuItem de izquierda. */
 	private JMenuItem izquierda;
+
+	/** El JMenuItem de centrado. */
 	private JMenuItem centrado;
+
+	/** El JMenuItem de derecha. */
 	private JMenuItem derecha;
+
+	/** El JMenuItem de justificado. */
 	private JMenuItem justificado;
 
+	/** El JMenuItem de negrita del menú emergente o popup. */
 	private JMenuItem negritaEmergente;
+
+	/** El JMenuItem de cursiva del menú emergente o popup. */
 	private JMenuItem cursivaEmergente;
+
+	/** El JMenuItem de subrayado del menú emergente o popup. */
 	private JMenuItem subrayadoEmergente;
 
+	/** El JMenuItem de izquierda del menú emergente o popup. */
 	private JMenuItem izquierdaEmergente;
+
+	/** El JMenuItem de centrado del menú emergente o popup. */
 	private JMenuItem centradoEmergente;
+
+	/** El JMenuItem de derecha del menú emergente o popup. */
 	private JMenuItem derechaEmergente;
+
+	/** El JMenuItem de justificado del menú emergente o popup. */
 	private JMenuItem justificadoEmergente;
 
+	/** El JMenu de fuente. */
 	private JMenu fuente;
+
+	/** El JMenu de tamaño. */
 	private JMenu tamanyo;
 
+	/** El JMenuItem del color. */
 	private JMenuItem colorPanel;
 
+	/** El popup o menú emergente. */
 	private JPopupMenu popUpMenu;
 
+	/** El JToggleButton del idioma "español". */
 	private JToggleButton espanyol;
+
+	/** El JToggleButton del idioma "inglés". */
 	private JToggleButton ingles;
+
+	/** El JToggleButton del idioma "francés". */
 	private JToggleButton frances;
+
+	/** El JToggleButton del idioma "alemán". */
 	private JToggleButton aleman;
 
+	/**
+	 * Configuración inicial de la ventana.
+	 */
 	private void configuracionInicial() {
 		// Ponemos la localidad por defecto
 		locale = new Locale("es");
@@ -144,6 +246,9 @@ public class Ventana extends JFrame {
 		setLocation(centroX, centroY);
 	}
 
+	/**
+	 * Inicialización de variables.
+	 */
 	public void inicializacionVariables() {
 		nombreTemas = new String[NUMERO_SKINS];
 
@@ -220,6 +325,9 @@ public class Ventana extends JFrame {
 		popUpMenu = laminaTexto.getPopupMenu();
 	}
 
+	/**
+	 * Inialización de variables relacionado con el idioma del editor de texto.
+	 */
 	public void inializacionVariablesIdioma() {
 		espanyol = new JToggleButton(new ImageIcon(Componente.redimensionar("imagenEspanyol", locale)));
 		espanyol.setName(Componente.getRecurso("textEspanyol", locale));
@@ -259,6 +367,10 @@ public class Ventana extends JFrame {
 		});
 	}
 
+	/**
+	 * Configuración lámina del menú superior del primero nivel, en este método se añade los
+	 * idiomas y el boton de salir.
+	 */
 	public void configuracionLaminaMenuSuperiorArriba() {
 		ButtonGroup grupo = new ButtonGroup();
 		grupo.add(espanyol);
@@ -274,6 +386,9 @@ public class Ventana extends JFrame {
 				.anyadirComponenteMenuHerramientas(laminaMenuSuperiorArriba.getSalir().getComponenteToggleButton());
 	}
 
+	/**
+	 * Configuración del JMenuBar, este método añade elementos al menú de la ventana.
+	 */
 	private void configuracionJMenuBar() {
 		JMenuBar menuBar = new JMenuBar();
 
@@ -346,6 +461,9 @@ public class Ventana extends JFrame {
 		setJMenuBar(menuBar);
 	}
 
+	/**
+	 * Configuración del menú emergente o popup.
+	 */
 	public void configuracionMenuEmergente() {
 		popUpMenu.add(negritaEmergente);
 		popUpMenu.add(cursivaEmergente);
@@ -357,11 +475,17 @@ public class Ventana extends JFrame {
 		popUpMenu.add(justificadoEmergente);
 	}
 
+	/**
+	 * Configuración final de la ventana.
+	 */
 	public void configuracionFinal() {
 		setContentPane(laminaPrincipal);
 		setVisible(true);
 	}
 
+	/**
+	 * Poner nombre a los menús del JMenuBar.
+	 */
 	public void ponerNombreMenu() {
 		archivoMenu.setText(Componente.getRecurso("tituloArchivo", locale));
 		insertarMenu.setText(Componente.getRecurso("tituloInsertar", locale));
@@ -374,6 +498,11 @@ public class Ventana extends JFrame {
 		acercaDeItem.setText(Componente.getRecurso("tituloAcercaDeItem", locale));
 	}
 
+	/**
+	 * Configuración del idioma donde se cambia el idioma según el botón seleccionado.
+	 *
+	 * @param e El evento de los botones de cambiar el idioma
+	 */
 	public void configuracionIdioma(ActionEvent e) {
 		String nombre = ((JToggleButton) e.getSource()).getName();
 		if (INGLES.equals(nombre)) {
@@ -529,6 +658,11 @@ public class Ventana extends JFrame {
 		}
 	}
 
+	/**
+	 * Cambia el aspecto del editor de texto.
+	 *
+	 * @param nombreSkin el nombre del aspecto o skin a cambiar
+	 */
 	public void cambioSkin(String nombreSkin) {
 		try {
 			UIManager.setLookAndFeel(nombreSkin);
@@ -539,6 +673,9 @@ public class Ventana extends JFrame {
 		}
 	}
 
+	/**
+	 * Instancia una nueva ventana.
+	 */
 	public Ventana() {
 		configuracionInicial();
 
@@ -555,6 +692,11 @@ public class Ventana extends JFrame {
 		configuracionFinal();
 	}
 
+	/**
+	 * Estable la localidad.
+	 *
+	 * @param locale la localidad
+	 */
 	public void setLocale(Locale locale) {
 		this.locale = locale;
 	}

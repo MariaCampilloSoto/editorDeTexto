@@ -1,3 +1,6 @@
+/**
+ * @author: María Inmaculada Campillo Soto
+ */
 package listenner;
 
 import java.awt.event.ActionEvent;
@@ -15,24 +18,58 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import lamina.LaminaTexto;
 import modelo.Componente;
 
+/**
+ * El escuchador que recive eventos de la clase "GuardarArchivo" e interactua con el
+ * editor de texto, guardando el contenido en un archivo.
+ *
+ * @see componente.GuardarArchivo
+ */
 public class GuardarArchivoListener implements ActionListener {
+
+	/** La lámina de texto. */
 	private LaminaTexto laminaTexto;
-	
+
+	/** La localidad. */
 	private Locale locale;
+
+	/**
+	 * El texto de la ventana emergente que sale si no se selecciona un archivo corectamente.
+	 */
 	private String texto;
+
+	/**
+	 * El título de la ventana emergente que sale si no se selecciona un archivo corectamente.
+	 */
 	private String titulo;
 
+	/**
+	 * Poner el texto correspondiente en la ventana emergente según la localidad.
+	 *
+	 * @param locale La localidad.
+	 */
 	public void ponerTextoTitulo(Locale locale) {
 		texto = Componente.getRecurso("errorGuardarArchivo", locale);
 		titulo = Componente.getRecurso("tituloError", locale);
 	}
 
+	/**
+	 * Instancia un nuevo escuchador.
+	 *
+	 * @param laminaTexto La lámina de texto
+	 * @param locale      La localidad
+	 */
 	public GuardarArchivoListener(LaminaTexto laminaTexto, Locale locale) {
 		this.laminaTexto = laminaTexto;
 		this.locale = locale;
 		ponerTextoTitulo(locale);
 	}
 
+	/**
+	 * Método que abre una ventana emergente que facilita la búsqueda de un archivo a guardar
+	 * o se creará uno nuevo.
+	 *
+	 * @param e El evento
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		JFileChooser fileChooser = new JFileChooser();

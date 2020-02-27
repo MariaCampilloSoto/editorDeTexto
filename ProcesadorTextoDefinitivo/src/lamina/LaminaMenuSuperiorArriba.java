@@ -1,3 +1,6 @@
+/**
+ * @author: María Inmaculada Campillo Soto
+ */
 package lamina;
 
 import java.awt.FlowLayout;
@@ -22,22 +25,48 @@ import listenner.InsertarImagenListener;
 import listenner.SalirListener;
 import modelo.Lamina;
 
+/**
+ * La clase "LaminaMenuSuperiorArriba" contine los JToggleButton de las clases heredadas
+ * de "Componente", esta clase se situará en la parte superior del editor pero en el
+ * primer novel.
+ * 
+ * @see modelo.Lamina
+ * @see modelo.Componente
+ * @see lamina.LaminaMenuSuperiorAbajo
+ */
 public class LaminaMenuSuperiorArriba extends Lamina {
+
+	/** La constante serialVersionUID. */
 	private static final long serialVersionUID = 1L;
+
+	/** La ortografía es seleccionada o no. */
 	// Variables que usaremos y pondremos en una parte del menu de herramientas
 	private boolean ortografiaSelected;
 
+	/** El menú de herramientas. */
 	private JToolBar menuHerramientas;
 
+	/** Objeto para abrir un archivo. */
 	private AbrirArchivo abrirArchivo;
+
+	/** Objeto para guardar un archivo. */
 	private GuardarArchivo guardarArchivo;
 
+	/** Objeto de insertar imagen. */
 	private InsertarImagen insertarImagen;
 
+	/** La ortografía. */
 	private Ortografia ortografia;
 
+	/** El objeto para salir. */
 	private Salir salir;
 
+	/**
+	 * Inicialización de variables.
+	 *
+	 * @param laminaTexto La lámina que contiene el texto.
+	 * @param locale      La localidad.
+	 */
 	public void inicializacionVariables(LaminaTexto laminaTexto, Locale locale) {
 		// Inicializacion de la varibles
 		abrirArchivo = new AbrirArchivo("imagenAbrirArchivo", "textAbrirArchivo", null, locale,
@@ -81,8 +110,11 @@ public class LaminaMenuSuperiorArriba extends Lamina {
 		anyadirComponente(salir);
 	}
 
+	/**
+	 * Configurar el menú de herramientas, añadiendole los elementos a este.
+	 */
 	private void configurarBox() {
-		// Poner elementos en el menÃº de herramientas
+		// Poner elementos en el menú de herramientas
 		menuHerramientas = new JToolBar();
 		menuHerramientas.setFloatable(false);
 
@@ -96,11 +128,22 @@ public class LaminaMenuSuperiorArriba extends Lamina {
 		add(menuHerramientas);
 	}
 
+	/**
+	 * Añade un componente, que son JToggleButton, al menú de herramientas.
+	 *
+	 * @param button El botón a añadir.
+	 */
 	// AÃ±adir futuros componentes al final de la barra de herramientas
 	public void anyadirComponenteMenuHerramientas(JToggleButton button) {
 		menuHerramientas.add(button);
 	}
 
+	/**
+	 * Instancia un nuevo objeto que es una lámina de menú en la parte superior del editor de
+	 * texto arriba.
+	 *
+	 * @param laminaTexto La lámina de texto.
+	 */
 	public LaminaMenuSuperiorArriba(LaminaTexto laminaTexto) {
 		Locale locale = getLocale();
 		setLayout(new FlowLayout());
@@ -112,22 +155,47 @@ public class LaminaMenuSuperiorArriba extends Lamina {
 		configurarBox();
 	}
 
+	/**
+	 * Obtiene el objeto de abrir archivo.
+	 *
+	 * @return el objeto de abrir archivo
+	 */
 	public AbrirArchivo getAbrirArchivo() {
 		return abrirArchivo;
 	}
 
+	/**
+	 * Obtiene el objeto de guardar archivo.
+	 *
+	 * @return el objeto de guardar archivo
+	 */
 	public GuardarArchivo getGuardarArchivo() {
 		return guardarArchivo;
 	}
 
+	/**
+	 * Obtiene el objeto de insertar imagen.
+	 *
+	 * @return the insertar imagen
+	 */
 	public InsertarImagen getInsertarImagen() {
 		return insertarImagen;
 	}
 
+	/**
+	 * Obtiene el objeto de la ortografía.
+	 *
+	 * @return el objeto de la ortografía
+	 */
 	public Ortografia getOrtografia() {
 		return ortografia;
 	}
 
+	/**
+	 * Obtiene el objeto de salir.
+	 *
+	 * @return el objeto de salir
+	 */
 	public Salir getSalir() {
 		return salir;
 	}

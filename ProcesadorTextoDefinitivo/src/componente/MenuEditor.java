@@ -1,3 +1,6 @@
+/**
+ * @author: María Inmaculada Campillo Soto
+ */
 package componente;
 
 import java.awt.Image;
@@ -15,15 +18,32 @@ import javax.swing.text.DefaultEditorKit;
 import lamina.LaminaTexto;
 import modelo.Componente;
 
+/**
+ * La clase "MenuEditor" representa un JMenu en el editor de texto, su funcionalidad general
+ * de cortar, copiar o pegar contenido en el editor de texto.
+ */
 public class MenuEditor extends JMenu {
+
+	/** La constante serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
+	/** La accion de copiar. */
 	private Action aCopiar;
+
+	/** La accion de cortar. */
 	private Action aCortar;
+
+	/** La accion de pegar. */
 	private Action aPegar;
 
+	/** La localidad que tiene la ccion. */
 	private Locale locale;
 
+	/**
+	 * Poner nombre a las acciones acciones.
+	 *
+	 * @param locale the locale
+	 */
 	public void ponerNombreAcciones(Locale locale) {
 		// Es como cambiar idioma
 		aCopiar.putValue(Action.NAME, Componente.getRecurso("textCopiar", locale));
@@ -31,6 +51,12 @@ public class MenuEditor extends JMenu {
 		aPegar.putValue(Action.NAME, Componente.getRecurso("textPegar", locale));
 	}
 
+	/**
+	 * Inicializa un nuevo editor que es un menu.
+	 *
+	 * @param title       El nombre, texto del menu
+	 * @param laminaTexto Una lámina texto para añadir las acciones creadas.
+	 */
 	public MenuEditor(String title, LaminaTexto laminaTexto) {
 		super(title);
 		locale = getLocale();

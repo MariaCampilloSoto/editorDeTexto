@@ -1,3 +1,6 @@
+/**
+ * @author: María Inmaculada Campillo Soto
+ */
 package modelo;
 
 import java.awt.Dimension;
@@ -15,19 +18,55 @@ import javax.swing.text.StyledEditorKit;
 
 import lamina.LaminaTexto;
 
+/**
+ * La clase generica "Especial" en la que se puede prefentar en forma de JMenu o
+ * JComboBox.
+ *
+ * @param <E> El tipo del elemento
+ * 
+ * @see especial.Tamanyo
+ * @see especial.Fuente
+ */
 public class Especial<E> {
+
+	/** La contante FUENTE con el texto del JMenu de la fuente. */
 	// Para los JMenu, sus valores si cambian
 	public final static String FUENTE = ResourceBundle.getBundle(Componente.PROPERTY_FILE).getString("textFuente");
+
+	/** La constante TAMANYO con el texto del JMenu del tamaño. */
 	public final static String TAMANYO = ResourceBundle.getBundle(Componente.PROPERTY_FILE).getString("textTamanyo");
 
+	/** El nombre del recurso. */
 	private String nombre;
+
+	/**
+	 * El nombre de la etiqueta del archivo properties que referencia al nombre del
+	 * componente.
+	 */
 	private final String nombreProperty;
+
+	/** El número de elementos en el menú. */
 	private final int numeroElementosMenu;
+
+	/** El menú. */
 	private JMenu menu;
+
+	/** El comboBox. */
 	private JComboBox<E> combo;
+
+	/** Lista de elementos. */
 	private E[] elementos;
+
+	/** La lámina del texto. */
 	private LaminaTexto laminaTexto;
 
+	/**
+	 * Obtiene el combo box con un elemento predefinido, las acciones ya integradas en cada
+	 * componente del combo.
+	 *
+	 * @return el combo box
+	 * @see #getCombo()
+	 */
 	public JComboBox<E> getComboBox() {
 		combo = new JComboBox<E>(elementos);
 		combo.setName(nombre);
@@ -92,6 +131,12 @@ public class Especial<E> {
 		return combo;
 	}
 
+	/**
+	 * Obtiene el menú con ciertos elementos del comboBox y cada uno de ellos con su acción.
+	 *
+	 * @return the new menu
+	 * @see #getMenu()
+	 */
 	public JMenu getNewMenu() {
 		// Solamente crearemos ciertos JMenuItem
 		menu = new JMenu(nombre);
@@ -135,11 +180,26 @@ public class Especial<E> {
 		return menu;
 	}
 
+	/**
+	 * Cambiar el idioma según la localidad.
+	 *
+	 * @param locale La localidad
+	 */
 	public void cambiarIdioma(Locale locale) {
 		menu.setText(Componente.getRecurso(nombreProperty, locale));
 		combo.setName(Componente.getRecurso(nombreProperty, locale));
 	}
 
+	/**
+	 * Inicializa un nuevo objeto de la clase "Especial".
+	 *
+	 * @param locale              La localización.
+	 * @param laminaTexto         La lámina del texto.
+	 * @param nombreProperty      El nombre de la etiqueta del archivo properties que
+	 *                            referencia al nombre del componente.
+	 * @param numeroElementosMenu El número de elementos en el menú.
+	 * @param elementos           Una array de elementos.
+	 */
 	@SafeVarargs
 	public Especial(Locale locale, LaminaTexto laminaTexto, String nombreProperty, int numeroElementosMenu,
 			E... elementos) {
@@ -150,26 +210,59 @@ public class Especial<E> {
 		this.nombre = Componente.getRecurso(nombreProperty, locale);
 	}
 
+	/**
+	 * Obtiene el nombre del elemento.
+	 *
+	 * @return el nombre
+	 */
 	public String getNombre() {
 		return nombre;
 	}
 
+	/**
+	 * Obtiene el combo pero sin crear un nuevo objeto.
+	 *
+	 * @return el comboBox
+	 * 
+	 * @see #getComboBox()
+	 */
 	public JComboBox<E> getCombo() {
 		return combo;
 	}
 
+	/**
+	 * Obtiene el nombre de la etiqueta del archivo properties.
+	 *
+	 * @return el nombre en el property
+	 */
 	public String getNombreProperty() {
 		return nombreProperty;
 	}
 
+	/**
+	 * Obtiene los elementos.
+	 *
+	 * @return los elementos
+	 */
 	public E[] getElementos() {
 		return elementos;
 	}
 
+	/**
+	 * Obtiene el número de elementos en el menú.
+	 *
+	 * @return el número elementos del menú
+	 */
 	public int getNumeroElementosMenu() {
 		return numeroElementosMenu;
 	}
 
+	/**
+	 * Obtiene el menú pero sin crear un nuevo objeto..
+	 *
+	 * @return el menú
+	 * @see Especial#getNewMenu()
+	 */
 	public JMenu getMenu() {
 		return menu;
 	}

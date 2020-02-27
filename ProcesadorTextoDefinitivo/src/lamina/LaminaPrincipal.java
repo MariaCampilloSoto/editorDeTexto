@@ -1,17 +1,37 @@
+/**
+ * @author: María Inmaculada Campillo Soto
+ */
 package lamina;
 
 import java.awt.BorderLayout;
 
 import javax.swing.JPanel;
 
+/**
+ * La clase "LaminaPrincipal" que contiene el resto de láminas del paquete y las organiza.
+ * 
+ * @see lamina.LaminaMenuSuperiorAbajo
+ * @see lamina.LaminaMenuSuperiorArriba
+ * @see lamina.LaminaTexto
+ */
 public class LaminaPrincipal extends JPanel {
+
+	/** La constate serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
+	/** La lámina del menú superior de abajo. */
 	// Contiene la barra de herramientas que son dos laminas y donde se escribe el texto
 	private LaminaMenuSuperiorAbajo laminaMenuSuperiorAbajo;
+
+	/** La lámina menú del superior de arriba. */
 	private LaminaMenuSuperiorArriba laminaMenuSuperiorArriba;
+
+	/** La lámina de texto. */
 	private LaminaTexto laminaTexto;
 
+	/**
+	 * Instancia una nueva lámina principal.
+	 */
 	public LaminaPrincipal() {
 		// Ponemos un layout para poner poder poner las laminas de forma adecuada
 		setLayout(new BorderLayout());
@@ -37,14 +57,29 @@ public class LaminaPrincipal extends JPanel {
 		add(laminaTexto, BorderLayout.CENTER);
 	}
 
+	/**
+	 * Obtiene la lámina del menú superior de abajo.
+	 *
+	 * @return La lámina del menú superior de abajo
+	 */
 	public LaminaMenuSuperiorAbajo getLaminaMenuSuperiorAbajo() {
 		return laminaMenuSuperiorAbajo;
 	}
 
+	/**
+	 * Obtiene la lámina del menú superior de arriba.
+	 *
+	 * @return La lámina del menú superior de arriba
+	 */
 	public LaminaMenuSuperiorArriba getLaminaMenuSuperiorArriba() {
 		return laminaMenuSuperiorArriba;
 	}
 
+	/**
+	 * Obtiene la lámina de texto.
+	 *
+	 * @return la lámina de texto
+	 */
 	public LaminaTexto getLaminaTexto() {
 		return laminaTexto;
 	}

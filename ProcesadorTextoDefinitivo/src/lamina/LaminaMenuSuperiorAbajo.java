@@ -1,3 +1,6 @@
+/**
+ * @author: María Inmaculada Campillo Soto
+ */
 package lamina;
 
 import java.util.Locale;
@@ -26,26 +29,60 @@ import listenner.NegritaListener;
 import listenner.SubrayadoListener;
 import modelo.Lamina;
 
+/**
+ * La clase "LaminaMenuSuperiorAbajo" contiene los JToggleButton de las clases heredadas
+ * de "Componente", esta clase se situará en la parte superior del editor pero en segundo
+ * nivel.
+ * 
+ * @see modelo.Lamina
+ * @see modelo.Componente
+ * @see lamina.LaminaMenuSuperiorArriba
+ */
 public class LaminaMenuSuperiorAbajo extends Lamina {
+
+	/** La constante serialVersionUID. */
 	private static final long serialVersionUID = 1L;
+
+	/** La constante MAXIMO_TAMANYO, número máximo que tendrá el tamaño. */
 	// Variables que vamos a usar
 	public static final int MAXIMO_TAMANYO = 84;
 
+	/** La fuente. */
 	private Fuente fuente;
 
+	/** El tamaño. */
 	private Tamanyo tamanyo;
 
+	/** La negrita. */
 	private Negrita negrita;
+
+	/** La cursiva. */
 	private Cursiva cursiva;
+
+	/** El subrayado. */
 	private Subrayado subrayado;
 
+	/** La izquierda. */
 	private Izquierda izquierda;
+
+	/** El centrado. */
 	private Centrado centrado;
+
+	/** La derecha. */
 	private Derecha derecha;
+
+	/** El justificado. */
 	private Justificado justificado;
 
+	/** El color del texto del panel. */
 	private ColorComponente colorPanel;
 
+	/**
+	 * Inicialización de las variables.
+	 *
+	 * @param laminaTexto La lámina que contiene el texto.
+	 * @param locale      La localización.
+	 */
 	private void inicializacionVariables(LaminaTexto laminaTexto, Locale locale) {
 		// Inicializacion variables
 		fuente = new Fuente(locale, laminaTexto, "textFuente", 25);
@@ -83,6 +120,9 @@ public class LaminaMenuSuperiorAbajo extends Lamina {
 		anyadirComponente(colorPanel);
 	}
 
+	/**
+	 * Configuración del JToolBar.
+	 */
 	private void configuracionToolBar() {
 		// Creamos el toolbar
 		JToolBar menuHerramientas = new JToolBar();
@@ -117,9 +157,14 @@ public class LaminaMenuSuperiorAbajo extends Lamina {
 		add(menuHerramientas);
 	}
 
+	/**
+	 * Ponemos números en un array con diferentes tamaños que podrá adoptar la letra.
+	 *
+	 * @return El array de enteros
+	 */
 	private Integer[] ponerNumerosArray() {
-		// Para poner ciertos numeros en el toolbar, de lo contraio serÃ­an muchos y el usuario se
-		// estresarÃ­a
+		// Para poner ciertos numeros en el toolbar, de lo contrario serán muchos y el usuario se
+		// estresará
 		int i = 0;
 		int numeroTamanyo = 1;
 		// Cogemos el numero de elementos
@@ -139,7 +184,7 @@ public class LaminaMenuSuperiorAbajo extends Lamina {
 
 		}
 
-		// Teniendo el numero de elementos que vamos a poner, creamos un array
+		// Teniendo el número de elementos que vamos a poner, creamos un array
 		Integer[] listaNumeros = new Integer[i];
 		i = 0;
 		numeroTamanyo = 1;
@@ -166,6 +211,12 @@ public class LaminaMenuSuperiorAbajo extends Lamina {
 		return listaNumeros;
 	}
 
+	/**
+	 * Inicializa una nueva lámina con el menú de herramientas superior pero en el segundo
+	 * nivel.
+	 *
+	 * @param laminaTexto la lámina detexto
+	 */
 	public LaminaMenuSuperiorAbajo(LaminaTexto laminaTexto) {
 		// Cogemos el locale que le pasaremos a las variables
 		Locale locale = getLocale();
@@ -175,42 +226,92 @@ public class LaminaMenuSuperiorAbajo extends Lamina {
 		configuracionToolBar();
 	}
 
+	/**
+	 * Obtiene la fuente.
+	 *
+	 * @return la fuente
+	 */
 	public Fuente getFuente() {
 		return fuente;
 	}
 
+	/**
+	 * Obtiene el tamaño.
+	 *
+	 * @return el tamaño
+	 */
 	public Tamanyo getTamanyo() {
 		return tamanyo;
 	}
 
+	/**
+	 * Obtiene la negrita.
+	 *
+	 * @return la negrita
+	 */
 	public Negrita getNegrita() {
 		return negrita;
 	}
 
+	/**
+	 * Obtiene la cursiva.
+	 *
+	 * @return la cursiva
+	 */
 	public Cursiva getCursiva() {
 		return cursiva;
 	}
 
+	/**
+	 * Obtiene el subrayado.
+	 *
+	 * @return el subrayado
+	 */
 	public Subrayado getSubrayado() {
 		return subrayado;
 	}
 
+	/**
+	 * Obtiene la izquierda.
+	 *
+	 * @return la izquierda
+	 */
 	public Izquierda getIzquierda() {
 		return izquierda;
 	}
 
+	/**
+	 * Obtiene el centrado.
+	 *
+	 * @return el centrado
+	 */
 	public Centrado getCentrado() {
 		return centrado;
 	}
 
+	/**
+	 * Obtiene la derecha.
+	 *
+	 * @return la derecha
+	 */
 	public Derecha getDerecha() {
 		return derecha;
 	}
 
+	/**
+	 * Obtiene el justificado.
+	 *
+	 * @return el justificado
+	 */
 	public Justificado getJustificado() {
 		return justificado;
 	}
 
+	/**
+	 * Obtiene el objeto que cambia el color del texto.
+	 *
+	 * @return el objeto color
+	 */
 	public ColorComponente getColorPanel() {
 		return colorPanel;
 	}
